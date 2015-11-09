@@ -10,13 +10,20 @@ import {setPlatform} from '../common/device/actions';
 // https://github.com/yahoo/react-intl/issues/119
 // Nevermind, we can use plain old format from intl. Check todos Header.
 // import {IntlProvider} from 'react-intl';
+// TODO: Wait for react-native will support React 0.14
 
 import '../../node_modules/intl/index.js';
 import '../../node_modules/intl/locale-data/jsonp/en.js';
 
 export default function index(platform) {
 
-  const store = configureStore();
+  // TODO: Add engine.
+  const initialState = {
+    device: {
+      isMobile: true
+    }
+  };
+  const store = configureStore({initialState});
   // Set platform, ios or android.
   store.dispatch(setPlatform(platform));
 

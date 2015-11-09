@@ -23,8 +23,9 @@ If you are using different node versions on your machine, use `nvm` to manage th
 - [React](http://facebook.github.io/react/) with server side rendering on [expressjs](http://expressjs.com/) backend.
 - [React Native](https://facebook.github.io/react-native/) for iOS and Android (wip).
 - [Redux](http://rackt.github.io/redux/) [Flux](https://facebook.github.io/flux/) with atomic [immutable.js](http://facebook.github.io/immutable-js) app state.
-- [react-router](https://github.com/rackt/react-router).
 - ECMAScript 2015+ with [babeljs.io](https://babeljs.io/). [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and [Flowtype](http://flowtype.org/) syntax supported. Sourcemaps enabled by default.
+- [react-router](https://github.com/rackt/react-router) for isomorphic routing.
+- Universal/Isomorphic data fetching example.
 - Well tuned [webpack](http://webpack.github.io/) dev stack.
 - [eslint](http://eslint.org/) ([Sublime Text 3 integration](https://github.com/steida/este/wiki/Recommended-Sublime-Text-3-settings#how-to-setup-the-eslint-for-st3))
 - Localization via [formatjs.io](http://formatjs.io/).
@@ -102,7 +103,7 @@ Yes it does. Este is agnostic of what you use in your backend and is completely 
 Yes. Este makes little assumptions about your stack, and passing every bit of needed info through props. This is not a framework, nothing prevents you from picking the bits you're interested in.
 
 #### Why Este is pure and why we have to pass data through props?
-Pure means no side effects. Programming without side effects rocks. It allows us to hot reload everything and testing is much easier as well. When component renders only data passed through props, [shouldComponentUpdate](https://facebook.github.io/react/docs/component-specs.html#updating-shouldcomponentupdate) can be implemented [only once](https://github.com/este/este/blob/d08556dd1e4d57b4c0e605e3395ce6af9963910e/src/client/components/component.react.js#L14) per whole app. One can say it's verbose, but it isn't. It's explicit. And remember, we have to pass only data going to be rendered. Actions have access to app state.
+Pure means no side effects. Programming without side effects rocks. It allows us to hot reload everything and testing is much easier as well. When component renders only data passed through props, [shouldComponentUpdate](https://facebook.github.io/react/docs/component-specs.html#updating-shouldcomponentupdate) can be implemented [only once](https://github.com/este/este/blob/master/src/native/components/Component.react.js#L11) per whole app. One can say it's verbose, but it isn't. It's explicit. And remember, we have to pass only data going to be rendered. Actions have access to app state.
 
 ## Training
 - [learn-reactjs.com](http://www.learn-reactjs.com)

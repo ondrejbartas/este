@@ -3,6 +3,7 @@ import bg from 'gulp-bg';
 import eslint from 'gulp-eslint';
 import fs from 'fs';
 import gulp from 'gulp';
+import mochaRunCreator from './test/mochaRunCreator';
 import os from 'os';
 import path from 'path';
 import runSequence from 'run-sequence';
@@ -28,7 +29,7 @@ gulp.task('env', () => {
   process.env.NODE_ENV = args.production ? 'production' : 'development';
 });
 
-gulp.task('build-webpack', webpackBuild);
+gulp.task('build-webpack', ['env'], webpackBuild);
 gulp.task('build', ['build-webpack']);
 
 gulp.task('eslint', () => {
@@ -40,9 +41,20 @@ gulp.task('eslint-ci', () => {
   return runEslint().pipe(eslint.failAfterError());
 });
 
+gulp.task('mocha', () => {
+  mochaRunCreator('process')();
+});
+
+// Continuous test running
+gulp.task('mocha-watch', () => {
+  gulp.watch(
+    ['src/browser/**', 'src/common/**', 'src/server/**'],
+    mochaRunCreator('log')
+  );
+});
+
 gulp.task('test', done => {
-  // TODO: Add tests.
-  runSequence('eslint-ci', 'build-webpack', done);
+  runSequence('eslint-ci', 'mocha', 'build-webpack', done);
 });
 
 gulp.task('server-node', bg('node', './src/server'));
